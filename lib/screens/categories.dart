@@ -19,7 +19,9 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen>
-    with SingleTickerProviderStateMixin {
+// INITIAL ANIMATION
+    with
+        SingleTickerProviderStateMixin {
   // ANIMATION CONTROLLER
   late AnimationController _animationController;
 
