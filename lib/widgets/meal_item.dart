@@ -7,11 +7,19 @@ class MealItem extends StatelessWidget {
   const MealItem({
     super.key,
     required this.meal,
+    required this.onSelectMeal,
   });
 
   final Meal meal;
 
+  final void Function(Meal meal) onSelectMeal;
+
   String get complexityText {
+    print({
+      "no upper": meal.complexity.name,
+      "upper": meal.complexity.name[0].toUpperCase() +
+          meal.complexity.name.substring(1)
+    });
     return meal.complexity.name[0].toUpperCase() +
         meal.complexity.name.substring(1);
   }
@@ -31,15 +39,18 @@ class MealItem extends StatelessWidget {
       elevation: 2,
       margin: const EdgeInsets.all(8),
       child: InkWell(
-        onTap: () {},
+        onTap: () => onSelectMeal(meal),
         child: Stack(
           children: [
-            FadeInImage(
-              height: 200,
-              width: double.infinity,
-              fit: BoxFit.cover,
-              placeholder: MemoryImage(kTransparentImage),
-              image: NetworkImage(meal.imageUrl),
+            Hero(
+              tag: meal.id,
+              child: FadeInImage(
+                height: 200,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                placeholder: MemoryImage(kTransparentImage),
+                image: NetworkImage(meal.imageUrl),
+              ),
             ),
             Positioned(
               bottom: 0,
